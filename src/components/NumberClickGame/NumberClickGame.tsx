@@ -7,7 +7,7 @@ import GameBoard from "./GameBoard/GameBoard.tsx";
 import "./NumberClickGame.styles.css";
 
 export default function NumberClickGame() {
-  const [points, setPoints] = useState<number>(5);
+  const [points, setPoints] = useState<number>(0);
   const [circles, setCircles] = useState<Circle[]>([]);
   const [started, setStarted] = useState(false);
   const [current, setCurrent] = useState(1);

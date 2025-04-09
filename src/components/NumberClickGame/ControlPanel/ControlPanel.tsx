@@ -6,7 +6,13 @@ const ControlPanel = ({ points, setPoints, time, started, autoPlay, onStart, onA
       <h1 className="title">Number Click Game</h1>
       <div className="control-row">
         <label>Points:</label>
-        <input type="number" value={points} onChange={(e) => setPoints(parseInt(e.target.value))} className="w-20" />
+        <input
+          type="number"
+          value={points}
+          onChange={(e) => setPoints(parseInt(e.target.value))}
+          className="w-20"
+          min="0"
+        />
       </div>
       <div className="time">Time: {time.toFixed(1)}s</div>
       <div className="buttons">
