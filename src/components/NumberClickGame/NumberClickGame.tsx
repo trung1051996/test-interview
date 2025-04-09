@@ -47,9 +47,8 @@ export default function NumberClickGame() {
         setCurrent((c) => c + 1);
       }
       setCircles((prev) => prev.map((circle) => (circle.id === id ? { ...circle, fading: true } : circle)));
-      setTimeout(() => {
-        setCircles((prev) => prev.filter((c) => c.id !== id));
-      }, 3000);
+    } else if (id === current - 1) {
+      return;
     } else {
       setResult("lose");
       setStarted(false);

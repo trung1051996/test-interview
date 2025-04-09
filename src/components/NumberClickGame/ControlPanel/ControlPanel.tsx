@@ -9,9 +9,16 @@ const ControlPanel = ({ points, setPoints, time, started, autoPlay, onStart, onA
         <input
           type="number"
           value={points}
-          onChange={(e) => setPoints(parseInt(e.target.value))}
-          className="w-20"
           min="0"
+          step="1"
+          onChange={(e) => {
+            const value = e.target.value;
+            if (/^\d+$/.test(value)) {
+              // Remove warning out range
+              setPoints(parseInt(value));
+            }
+          }}
+          className="w-20"
         />
       </div>
       <div className="time">Time: {time.toFixed(1)}s</div>
