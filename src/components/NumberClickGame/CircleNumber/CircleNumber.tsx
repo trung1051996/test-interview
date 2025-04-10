@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 
-import CountDown from "../CountDown/Countdown";
+import CountDown from "../CountDown/CountDownTime";
 import { CircleNumberProps } from "../../../types/CircleProps";
 
 const CircleNumber = ({ id, x, y, fading, isLose, onCircleClick, total, index, time }: CircleNumberProps) => {
