@@ -1,7 +1,7 @@
 import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 import { CountDownHandle } from "../../../types/CounDownProps";
 
-const CountDown = forwardRef<CountDownHandle>((_, ref) => {
+const Countdown = forwardRef<CountDownHandle>((_, ref) => {
   const [time, setTime] = useState(3.0);
   const [running, setRunning] = useState(false);
 
@@ -29,4 +29,4 @@ const CountDown = forwardRef<CountDownHandle>((_, ref) => {
   return <>{`${time.toFixed(1)}s`}</>;
 });
 
-export default CountDown;
+export default Countdown;
