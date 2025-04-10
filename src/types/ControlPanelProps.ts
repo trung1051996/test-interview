@@ -1,4 +1,7 @@
+import { RefObject } from "react";
+
 export interface ControlPanelProps {
+  result: string | null;
   points: number;
   setPoints: (v: number) => void;
   time: number;
@@ -6,4 +9,5 @@ export interface ControlPanelProps {
   autoPlay: boolean;
   onStart: () => void;
   onAutoPlayToggle: () => void;
+  startFirstTimeRef: RefObject<boolean>;
 }

@@ -1,9 +1,33 @@
 import { ControlPanelProps } from "../../../types/ControlPanelProps";
 
-const ControlPanel = ({ points, setPoints, time, started, autoPlay, onStart, onAutoPlayToggle }: ControlPanelProps) => {
+const ControlPanel = ({
+  result,
+  points,
+  setPoints,
+  time,
+  started,
+  autoPlay,
+  onStart,
+  onAutoPlayToggle,
+  startFirstTimeRef,
+}: ControlPanelProps) => {
+  let title = "LET'S PLAY";
+  let titleClass = "title";
+
+  switch (result) {
+    case "win":
+      title = "ALL CLEARED";
+      titleClass = "title title-win";
+      break;
+    case "lose":
+      title = "GAME OVER";
+      titleClass = "title title-lose";
+      break;
+  }
+
   return (
     <div className="container">
-      <h1 className="title">Number Click Game</h1>
+      <h1 className={titleClass}>{title}</h1>
       <div className="control-row">
         <label>Points:</label>
         <input
@@ -23,7 +47,7 @@ const ControlPanel = ({ points, setPoints, time, started, autoPlay, onStart, onA
       </div>
       <div className="time">Time: {time.toFixed(1)}s</div>
       <div className="buttons">
-        <button onClick={onStart}>{started ? "Restart" : "Play"}</button>
+        <button onClick={onStart}>{startFirstTimeRef?.current ? "Play" : "Restart"}</button>
         {started && <button onClick={onAutoPlayToggle}>Auto Play {!autoPlay ? "ON" : "OFF"}</button>}
       </div>
     </div>

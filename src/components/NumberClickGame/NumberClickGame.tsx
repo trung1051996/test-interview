@@ -15,6 +15,7 @@ export default function NumberClickGame() {
   const [time, setTime] = useState(0);
   const timerRef = useRef<number | null>(null);
   const [result, setResult] = useState<"win" | "lose" | null>(null);
+  const startFirstTimeRef = useRef<boolean>(true);
 
   const initGame = (pts: number) => {
     const newCircles: Circle[] = Array.from({ length: pts }, (_, i) => {
@@ -35,14 +36,17 @@ export default function NumberClickGame() {
     setStarted(true);
     setAutoPlay(false);
     initGame(points);
+    startFirstTimeRef.current = false;
   };
 
   const handleCircleClick = (id: number) => {
     if (!started) return;
     if (id === current) {
       if (current === points) {
-        setResult("win");
-        setStarted(false);
+        setTimeout(() => {
+          setResult("win");
+          setStarted(false);
+        }, 3000);
       } else {
         setCurrent((c) => c + 1);
       }
@@ -52,7 +56,7 @@ export default function NumberClickGame() {
     } else {
       setResult("lose");
       setStarted(false);
-      setCircles([]);
+      setCircles((prev) => prev.map((circle) => (circle.id >= current ? { ...circle, fading: false } : circle)));
     }
   };
 
@@ -85,6 +89,7 @@ export default function NumberClickGame() {
   return (
     <div className="relative">
       <ControlPanel
+        result={result}
         points={points}
         setPoints={setPoints}
         time={time}
@@ -92,14 +97,15 @@ export default function NumberClickGame() {
         autoPlay={autoPlay}
         onStart={startGame}
         onAutoPlayToggle={handleAutoPlay}
+        startFirstTimeRef={startFirstTimeRef}
       />
-      <GameBoard circles={circles} onCircleClick={handleCircleClick} />
+      <GameBoard time={time} result={result} circles={circles} onCircleClick={handleCircleClick} />
       <div className="next">Next: {current}</div>
-      {result && (
+      {/* {result && (
         <div className={`result-banner ${result === "win" ? "win fireworks" : "lose"}`}>
           {result === "win" ? "🎉 You Win!" : "❌ You Lose!"}
         </div>
-      )}
+      )} */}
     </div>
   );
 }
